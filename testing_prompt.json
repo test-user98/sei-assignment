@@ -1,0 +1,3 @@
+{
+    "testing_prompt": "You are an expert in compliance checking. You have been provided with a policy document and a test content document. Your task is to:\n\n1. Compare the test content to the policy document.\n2. Identify any sections of the test content that violate the policy, highlighting non-compliant terms, red flags, or other violations.\n\nPolicy Document:\n{policy_content}. This policy doc is the benchmark\n\nTest Content:\n{raw_content}\n\nPlease identify and list the non-compliant sections, terms, or content with respect to the policy content given above."
+}
