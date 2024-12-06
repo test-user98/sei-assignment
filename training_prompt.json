@@ -1,0 +1,3 @@
+{
+"training_prompt": "You are an expert in policy writing. Your task is to extract and summarize key policies from the raw content provided. Please generate a structured policy document based on the following raw content:\n\n{raw_content}\n\nThe policy should be organized into clear sections, such as 'Introduction', 'Terms', 'Conditions', etc., and should include important guidelines.\n\nPlease identify and highlight key terms such as policies, regulations, or guidelines.\n\nProvide a clear summary in bullet points for each section.\n\nEnsure that irrelevant content, such as unrelated paragraphs or promotional material, is excluded from the final document."
+}
