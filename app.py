@@ -8,20 +8,20 @@ import re
 import json
 from datetime import datetime
 import os
-from openai import OpenAI
 from urllib.parse import urlparse
 
+load_dotenv()
 
 app = FastAPI()
 API_TOKEN = os.getenv('API_TOKEN')
+
 genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-# Define directories
 POLICY_DIR = "policy"
 os.makedirs(POLICY_DIR, exist_ok=True)
 
-# Input schemas
+
 class TrainRequest(BaseModel):
     policy_name: str
     url: str
@@ -29,8 +29,6 @@ class TrainRequest(BaseModel):
 class ComplianceRequest(BaseModel):
     url: str
 
-# Forbidden terms regex pattern list
-FORBIDDEN_TERMS = []
 def get_prompt(mode, raw_content, policy=None):
     if mode == 'training':
         with open("training_prompt.json", "r", encoding="utf-8") as f:
@@ -128,17 +126,6 @@ def sanitize_content(content: str) -> str:
     if not isinstance(content, str):
         content = str(content)
     return re.sub(r'[\x00-\x1F\x7F]', '', content)
-
-def regex_check(content: str):
-    findings = []
-    for term in FORBIDDEN_TERMS:
-        matches = re.finditer(term, content, re.IGNORECASE)
-        for match in matches:
-            findings.append({
-                "term": match.group(),
-                "context": content[max(0, match.start() - 50):match.end() + 50]
-            })
-    return findings
 
 
 @app.post("/train")
