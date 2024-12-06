@@ -4,6 +4,6 @@ __pycache__/
 *.json
 *.log
 *.sqlite3
-.venv/
+.env/
 .policy/
 .results/
